@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descubre nuevas canciones y artistas. Recomendaciones musicales adecuadas a tu situación.">
+    <title>Musica para vos: Identificate</title>
+    <style>
+        body {
+            background-color: #EADAC7;
+            font-family: 'American Typewriter', serif;
+        }
+        header {
+            text-align: center;
+        }
+        main {
+            text-align: center;
+            margin: 20px;
+        }
+        #results {
+            display: none;
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="assets/take the quiz.gif" alt="Take this quiz" width="1203px">
+    </header>
+    <main>
+        <section>
+            <form id="quizForm" onsubmit="return handleFormSubmit()">
+                <fieldset>
+                    <legend><h1>Información Personal</h1></legend>
+                    <label for="name">Nombre: <input type="text" name="name" id="name" placeholder="tu nombre" required></label>
+                    <br><br>
+                    <label for="email">Correo: <input type="email" name="email" id="email" placeholder="nombre@gmail.com" required></label>
+                    <br><br>
+                    <label for="age">Edad: <input type="number" name="age" id="age" placeholder="tu edad" required min="1"></label>
+                    <br><br>
+                    <label for="language">Idioma:
+                        <select name="language" id="language">
+                            <option value="spanish">Español</option>
+                            <option value="english">Inglés</option>
+                        </select>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend><h1>¿Cuáles son tus preferencias?</h1></legend>
+                    <label for="question1">¿Qué idioma escuchas?</label><br>
+                    <label><input type="radio" name="option1" value="ingles" required> Inglés</label><br>
+                    <label><input type="radio" name="option1" value="espanol"> Español</label><br><br>
+                    <label for="question2">¿Qué género te gusta más?</label><br>
+                    <label><input type="radio" name="option2" value="pop" required> Pop</label><br>
+                    <label><input type="radio" name="option2" value="rock"> Rock</label><br>
+                    <label><input type="radio" name="option2" value="rap"> Rap</label><br>
+                    <label><input type="radio" name="option2" value="reggaeton"> Reggaeton</label><br>
+                    <label><input type="radio" name="option2" value="electronic"> Electrónica</label><br>
+                </fieldset>
+                <fieldset>
+                    <legend><h1>¿Cuál es tu situación amorosa?</h1></legend>
+                    <label for="question3">¿Estás enamorado?</label><br>
+                    <label><input type="radio" name="option3" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="option3" value="no"> No</label><br>
+                    <label for="question4">¿Es correspondido?</label><br>
+                    <label><input type="radio" name="option4" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="option4" value="no"> No</label><br>
+                </fieldset>
+                <fieldset>
+                    <legend><h1>¿Cómo te sientes?</h1></legend>
+                    <label for="question5">¿Te sientes feliz?</label><br>
+                    <label><input type="radio" name="option5" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="option5" value="no"> No</label><br>
+                    <label for="question6">¿Tenés ganas de llorar?</label><br>
+                    <label><input type="radio" name="option6" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="option6" value="no"> No</label><br>
+                    <label for="question7">¿Te gustaría disfrutar de una fiesta?</label><br>
+                    <label><input type="radio" name="option7" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="option7" value="no"> No</label><br>
+                    <label for="question8">¿Te sientes nostálgico?</label><br>
+                    <label><input type="radio" name="option8" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="option8" value="no"> No</label><br>
+                </fieldset>
+                <fieldset>
+                    <legend><h1>Preferencias Musicales</h1></legend>
+                    <label for="question9">¿Te gusta la música en vivo?</label><br>
+                    <label><input type="radio" name="option9" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="option9" value="no"> No</label><br>
+                    <label for="question10">¿Prefieres escuchar música por la noche?</label><br>
+                    <label><input type="radio" name="option10" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="option10" value="no"> No</label><br>
+                    <label for="question11">¿Prefieres letras profundas o alegres?</label><br>
+                    <label><input type="radio" name="option11" value="profundas" required> Profundas</label><br>
+                    <label><input type="radio" name="option11" value="alegres"> Alegres</label><br>
+                    <label for="question12">¿Te gusta escuchar música mientras estudias o trabajas?</label><br>
+                    <label><input type="radio" name="option12" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="option12" value="no"> No</label><br>
+                    <label for="question13">¿Te gusta explorar nuevos géneros musicales?</label><br>
+                    <label><input type="radio" name="option13" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="option13" value="no"> No</label><br>
+                </fieldset>
+                <fieldset>
+                    <legend><h1>Más Preferencias</h1></legend>
+                    <label for="favoriteColor">¿Cuál es tu color favorito?</label><br>
+                    <input type="text" name="favoriteColor" required>
+                    <br><br>
+                    <label for="favoriteFood">¿Cuál es tu comida favorita?</label><br>
+                    <input type="text" name="favoriteFood" required>
+                    <br><br>
+                    <label for="favoriteHobby">¿Cuál es tu hobby favorito?</label><br>
+                    <input type="text" name="favoriteHobby" required>
+                    <br><br>
+                    <label for="favoriteInstrument">¿Tocas algún instrumento? ¿Cuál?</label><br>
+                    <input type="text" name="favoriteInstrument" required>
+                    <br><br>
+                    <label for="favoriteWeather">¿Cuál es tu clima favorito?</label><br>
+                    <label><input type="radio" name="favoriteWeather" value="soleado" required> Soleado</label><br>
+                    <label><input type="radio" name="favoriteWeather" value="lluvioso"> Lluvioso</label><br>
+                    <label><input type="radio" name="favoriteWeather" value="frio"> Frío</label><br>
+                    <label><input type="radio" name="favoriteWeather" value="calido"> Cálido</label><br>
+                    <br>
+                    <label for="question21">¿Prefieres salir con amigos o quedarte en casa?</label><br>
+                    <label><input type="radio" name="socialPreference" value="salir" required> Salir</label><br>
+                    <label><input type="radio" name="socialPreference" value="quedarse"> Quedarse en casa</label><br>
+                    <br>
+                    <label for="question22">¿Te gusta viajar?</label><br>
+                    <label><input type="radio" name="travel" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="travel" value="no"> No</label><br>
+                    <br>
+                    <label for="question23">¿Cuál es tu artista favorito?</label><br>
+                    <input type="text" name="favoriteArtist" required>
+                    <br><br>
+                    <label for="question24">¿Te gusta más la música antigua o nueva?</label><br>
+                    <label><input type="radio" name="musicPreference" value="antigua" required> Antigua</label><br>
+                    <label><input type="radio" name="musicPreference" value="nueva"> Nueva</label><br>
+                    <br>
+                    <label for="question25">¿Te gustan las letras románticas?</label><br>
+                    <label><input type="radio" name="romanticLyrics" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="romanticLyrics" value="no"> No</label><br>
+                    <br>
+                    <label for="question26">¿Te gusta la música en otros idiomas?</label><br>
+                    <label><input type="radio" name="otherLanguages" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="otherLanguages" value="no"> No</label><br>
+                    <br>
+                    <label for="question27">¿Te gustan los soundtracks de películas?</label><br>
+                    <label><input type="radio" name="soundtracks" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="soundtracks" value="no"> No</label><br>
+                    <br>
+                    <label for="question28">¿Cuál es tu estación favorita del año?</label><br>
+                    <select name="favoriteSeason" required>
+                        <option value="primavera">Primavera</option>
+                        <option value="verano">Verano</option>
+                        <option value="otoño">Otoño</option>
+                        <option value="invierno">Invierno</option>
+                    </select>
+                    <br><br>
+                    <label for="question29">¿Te gusta más el día o la noche?</label><br>
+                    <label><input type="radio" name="dayOrNight" value="dia" required> Día</label><br>
+                    <label><input type="radio" name="dayOrNight" value="noche"> Noche</label><br>
+                    <br>
+                    <label for="question30">¿Te gusta la música de festivales?</label><br>
+                    <label><input type="radio" name="festivals" value="si" required> Sí</label><br>
+                    <label><input type="radio" name="festivals" value="no"> No</label><br>
+                </fieldset>
+                <input type="submit" value="Enviar">
+            </form>
+        </section>
+        <div id="results">
+            <h2>Resultados del Formulario</h2>
+            <div id="resultsContent"></div>
+        </div>
+    </main>
+
+    <script>
+        function handleFormSubmit() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const age = document.getElementById("age").value;
+            const language = document.getElementById("language").value;
+            const option1 = document.querySelector('input[name="option1"]:checked').value;
+            const option2 = document.querySelector('input[name="option2"]:checked').value;
+            const option3 = document.querySelector('input[name="option3"]:checked').value;
+            const option4 = document.querySelector('input[name="option4"]:checked').value;
+            const option5 = document.querySelector('input[name="option5"]:checked').value;
+            const option6 = document.querySelector('input[name="option6"]:checked').value;
+            const option7 = document.querySelector('input[name="option7"]:checked').value;
+            const option8 = document.querySelector('input[name="option8"]:checked').value;
+            const option9 = document.querySelector('input[name="option9"]:checked').value;
+            const option10 = document.querySelector('input[name="option10"]:checked').value;
+            const option11 = document.querySelector('input[name="option11"]:checked').value;
+            const option12 = document.querySelector('input[name="option12"]:checked').value;
+            const option13 = document.querySelector('input[name="option13"]:checked').value;
+            const favoriteColor = document.querySelector('input[name="favoriteColor"]').value;
+            const favoriteFood = document.querySelector('input[name="favoriteFood"]').value;
+            const favoriteHobby = document.querySelector('input[name="favoriteHobby"]').value;
+            const favoriteInstrument = document.querySelector('input[name="favoriteInstrument"]').value;
+            const favoriteWeather = document.querySelector('input[name="favoriteWeather"]:checked').value;
+            const socialPreference = document.querySelector('input[name="socialPreference"]:checked').value;
+            const travel = document.querySelector('input[name="travel"]:checked').value;
+            const favoriteArtist = document.querySelector('input[name="favoriteArtist"]').value;
+            const musicPreference = document.querySelector('input[name="musicPreference"]:checked').value;
+            const romanticLyrics = document.querySelector('input[name="romanticLyrics"]:checked').value;
+            const otherLanguages = document.querySelector('input[name="otherLanguages"]:checked').value;
+            const soundtracks = document.querySelector('input[name="soundtracks"]:checked').value;
+            const favoriteSeason = document.querySelector('select[name="favoriteSeason"]').value;
+            const dayOrNight = document.querySelector('input[name="dayOrNight"]:checked').value;
+            const festivals = document.querySelector('input[name="festivals"]:checked').value;
+
+            // Lógica de recomendación de canciones
+            let recommendedSongs = [];
+
+            // Criterios de recomendación
+            if (option2 === "pop") {
+                recommendedSongs.push("Levitating - Dua Lipa");
+                recommendedSongs.push("Shape of You - Ed Sheeran");
+                recommendedSongs.push("Uptown Funk - Mark Ronson");
+            } else if (option2 === "rock") {
+                recommendedSongs.push("Boulevard of Broken Dreams - Green Day");
+                recommendedSongs.push("Sweet Child O' Mine - Guns N' Roses");
+                recommendedSongs.push("Hotel California - Eagles");
+            } else if (option2 === "rap") {
+                if (option5 === "si") {
+                    recommendedSongs.push("Good Life - Kanye West");
+                    recommendedSongs.push("Sicko Mode - Travis Scott");
+                    recommendedSongs.push("God's Plan - Drake");
+                } else {
+                    recommendedSongs.push("Lose Yourself - Eminem");
+                    recommendedSongs.push("HUMBLE. - Kendrick Lamar");
+                    recommendedSongs.push("Juicy - The Notorious B.I.G.");
+                }
+            } else if (option2 === "reggaeton") {
+                recommendedSongs.push("Despacito - Luis Fonsi");
+                recommendedSongs.push("Taki Taki - DJ Snake");
+                recommendedSongs.push("Baila Baila Baila - DJ Snake");
+            } else if (option2 === "electronic") {
+                recommendedSongs.push("Titanium - David Guetta");
+                recommendedSongs.push("Wake Me Up - Avicii");
+                recommendedSongs.push("Strobe - Deadmau5");
+            }
+
+            // Ajustes por estado de ánimo
+            if (option3 === "si") {
+                if (option4 === "si") {
+                    recommendedSongs.push("Perfect - Ed Sheeran");
+                    recommendedSongs.push("I Wanna Dance with Somebody - Whitney Houston");
+                    recommendedSongs.push("Happy - Pharrell Williams");
+                } else {
+                    recommendedSongs.push("Someone Like You - Adele");
+                    recommendedSongs.push("Back to December - Taylor Swift");
+                    recommendedSongs.push("Te Amo - Franco de Vita");
+                }
+            } else if (option5 === "no") {
+                recommendedSongs.push("Breathe Me - Sia");
+                recommendedSongs.push("Fix You - Coldplay");
+                recommendedSongs.push("Creep - Radiohead");
+            }
+
+            // Más recomendaciones basadas en otras respuestas
+            if (favoriteWeather === "soleado") {
+                recommendedSongs.push("Here Comes the Sun - The Beatles");
+            } else if (favoriteWeather === "lluvioso") {
+                recommendedSongs.push("Set Fire to the Rain - Adele");
+            }
+
+            if (travel === "si") {
+                recommendedSongs.push("Come Away With Me - Norah Jones");
+            } else {
+                recommendedSongs.push("Home - Michael Bublé");
+            }
+
+            const resultsContent = `
+                <p><strong>Nombre:</strong> ${name}</p>
+                <p><strong>Correo:</strong> ${email}</p>
+                <p><strong>Edad:</strong> ${age}</p>
+                <p><strong>Idioma:</strong> ${language}</p>
+                <p><strong>¿Qué idioma escuchas?</strong> ${option1}</p>
+                <p><strong>¿Qué género te gusta más?</strong> ${option2}</p>
+                <p><strong>¿Estás enamorado?</strong> ${option3}</p>
+                <p><strong>¿Es correspondido?</strong> ${option4}</p>
+                <p><strong>¿Te sientes feliz?</strong> ${option5}</p>
+                <p><strong>¿Tenés ganas de llorar?</strong> ${option6}</p>
+                <p><strong>¿Te gustaría disfrutar de una fiesta?</strong> ${option7}</p>
+                <p><strong>¿Te sientes nostálgico?</strong> ${option8}</p>
+                <p><strong>¿Te gusta la música en vivo?</strong> ${option9}</p>
+                <p><strong>¿Prefieres escuchar música por la noche?</strong> ${option10}</p>
+                <p><strong>¿Prefieres letras profundas o alegres?</strong> ${option11}</p>
+                <p><strong>¿Te gusta escuchar música mientras estudias o trabajas?</strong> ${option12}</p>
+                <p><strong>¿Te gusta explorar nuevos géneros musicales?</strong> ${option13}</p>
+                <p><strong>Color favorito:</strong> ${favoriteColor}</p>
+                <p><strong>Comida favorita:</strong> ${favoriteFood}</p>
+                <p><strong>Hobby favorito:</strong> ${favoriteHobby}</p>
+                <p><strong>Instrumento que tocas:</strong> ${favoriteInstrument}</p>
+                <p><strong>Clima favorito:</strong> ${favoriteWeather}</p>
+                <p><strong>¿Prefieres salir con amigos o quedarte en casa?</strong> ${socialPreference}</p>
+                <p><strong>¿Te gusta viajar?</strong> ${travel}</p>
+                <p><strong>Artista favorito:</strong> ${favoriteArtist}</p>
+                <p><strong>Música antigua o nueva:</strong> ${musicPreference}</p>
+                <p><strong>¿Te gustan las letras románticas?</strong> ${romanticLyrics}</p>
+                <p><strong>¿Te gusta la música en otros idiomas?</strong> ${otherLanguages}</p>
+                <p><strong>¿Te gustan los soundtracks de películas?</strong> ${soundtracks}</p>
+                <p><strong>Estación favorita del año:</strong> ${favoriteSeason}</p>
+                <p><strong>Día o noche:</strong> ${dayOrNight}</p>
+                <p><strong>¿Te gusta la música de festivales?</strong> ${festivals}</p>
+                <h3>Canciones recomendadas:</h3>
+                <ul>
+                    ${recommendedSongs.map(song => `<li>${song}</li>`).join('')}
+                </ul>
+            `;
+
+            document.getElementById("resultsContent").innerHTML = resultsContent;
+            document.getElementById("results").style.display = "block";
+
+            return false; // Evitar el envío del formulario
+        }
+    </script>
+</body>
+</html>
